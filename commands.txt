@@ -1,0 +1,44 @@
+
+# Manage application
+
+python manage.py createsuperuser
+
+python manage.py migrate
+
+python manage.py collectstatic
+
+python manage.py shell
+
+
+# Creating/editing posts
+
+from django.contrib.auth.models import User
+
+User.objects.all()
+
+me = User.objects.get(username='samuel')
+
+Post.objects.all()
+
+Post.objects.create(author=Samuel, title='Sample title', text='Test')    
+
+Post.objects.filter(author=me)
+
+Post.objects.filter(title__contains='title')
+
+# Adding date
+
+from django.utils import timezone
+
+Post.objects.filter(published_date__lte=timezone.now())
+
+post = Post.objects.get(id=1)
+
+# Publishing
+
+post.publish()
+
+# Ordering/Sorting
+
+Post.objects.order_by('created_date')
+
